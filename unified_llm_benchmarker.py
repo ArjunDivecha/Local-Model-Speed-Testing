@@ -110,6 +110,7 @@ from abc import ABC, abstractmethod
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 import seaborn as sns
 from matplotlib.backends.backend_pdf import PdfPages
 import requests
@@ -516,96 +517,44 @@ class GoogleProvider(BaseProvider):
                 end_time = time.time()
                 generation_time = end_time - start_time
                 
-                # Check if request was blocked at the prompt level
-                if hasattr(response, 'prompt_feedback') and response.prompt_feedback:
-                    if hasattr(response.prompt_feedback, 'block_reason') and response.prompt_feedback.block_reason:
-                        return ProviderResponse(
-                            content="",
-                            tokens_generated=0,
-                            total_tokens=0,
-                            input_tokens=0,
-                            output_tokens=0,
-                            generation_time=generation_time,
-                            time_to_first_token=generation_time,
-                            success=False,
-                            error_message=f"Prompt blocked: {response.prompt_feedback.block_reason}"
-                        )
-                
-                # Check if response was blocked by safety filters
-                if response.candidates and len(response.candidates) > 0:
-                    candidate = response.candidates[0]
-                    
-                    # Check finish reason using numeric values
-                    if hasattr(candidate, 'finish_reason'):
-                        finish_reason = candidate.finish_reason
-                        finish_reason_value = finish_reason.value if hasattr(finish_reason, 'value') else int(finish_reason)
-                        
-                        if finish_reason_value == 3:  # SAFETY
-                            safety_ratings = getattr(candidate, 'safety_ratings', [])
-                            blocked_categories = []
-                            for rating in safety_ratings:
-                                if hasattr(rating, 'blocked') and rating.blocked:
-                                    blocked_categories.append(str(getattr(rating, 'category', 'UNKNOWN')))
-                            
-                            error_msg = f"Content blocked by safety filters. Categories: {', '.join(blocked_categories) if blocked_categories else 'Unknown'}"
-                            return ProviderResponse(
-                                content="",
-                                tokens_generated=0,
-                                total_tokens=0,
-                                input_tokens=0,
-                                output_tokens=0,
-                                generation_time=generation_time,
-                                time_to_first_token=generation_time,
-                                success=False,
-                                error_message=error_msg
-                            )
-                        elif finish_reason_value == 4:  # RECITATION
-                            return ProviderResponse(
-                                content="",
-                                tokens_generated=0,
-                                total_tokens=0,
-                                input_tokens=0,
-                                output_tokens=0,
-                                generation_time=generation_time,
-                                time_to_first_token=generation_time,
-                                success=False,
-                                error_message="Content blocked due to recitation concerns"
-                            )
-                
-                # Extract content from response using safer method
-                content = ""
-                
-                # Method 1: Try to get content from candidate parts first
-                if response.candidates and len(response.candidates) > 0:
-                    candidate = response.candidates[0]
-                    if hasattr(candidate, 'content') and candidate.content:
-                        if hasattr(candidate.content, 'parts') and candidate.content.parts:
-                            for part in candidate.content.parts:
-                                if hasattr(part, 'text') and part.text:
-                                    content += part.text
-                
-                # Method 2: Try response.text if no content from parts
-                if not content:
-                    try:
-                        if hasattr(response, 'text'):
-                            content = response.text
-                    except Exception:
-                        # If response.text fails, content remains empty
-                        pass
-                
-                if not content:
+                # --- Robust Response Handling ---
+
+                # 1. Check for prompt-level blocking first
+                if response.prompt_feedback.block_reason != 0:
                     return ProviderResponse(
-                        content="",
-                        tokens_generated=0,
-                        total_tokens=0,
-                        input_tokens=0,
-                        output_tokens=0,
-                        generation_time=generation_time,
-                        time_to_first_token=generation_time,
-                        success=False,
-                        error_message="No content generated - response may have been filtered or empty"
+                        content="", tokens_generated=0, total_tokens=0, input_tokens=0, output_tokens=0,
+                        generation_time=generation_time, time_to_first_token=generation_time,
+                        success=False, error_message=f"Prompt blocked: {response.prompt_feedback.block_reason.name}"
                     )
+
+                # 2. Extract content safely from parts
+                content = ""
+                if response.parts:
+                    for part in response.parts:
+                        if hasattr(part, 'text'):
+                            content += part.text
                 
+                # 3. Check the finish reason after extracting content
+                finish_reason_name = "UNKNOWN"
+                if response.candidates and response.candidates[0].finish_reason:
+                    finish_reason_name = response.candidates[0].finish_reason.name
+
+                # If content is empty AND finish reason is not STOP, it's a failure.
+                if not content and finish_reason_name not in ['STOP', 'MAX_TOKENS']:
+                    error_msg = f"No content generated. Finish Reason: {finish_reason_name}"
+                    # Add safety rating details if available
+                    if response.candidates and response.candidates[0].safety_ratings:
+                        ratings = [f"{rating.category.name}: {rating.probability.name}" for rating in response.candidates[0].safety_ratings]
+                        error_msg += f" | Safety Ratings: {', '.join(ratings)}"
+
+                    return ProviderResponse(
+                        content="", tokens_generated=0, total_tokens=0, input_tokens=0, output_tokens=0,
+                        generation_time=generation_time, time_to_first_token=generation_time,
+                        success=False, error_message=error_msg
+                    )
+
+                # If we have content (even partial), treat as success.
+                # The MAX_TOKENS case is a valid, successful termination.
                 # Calculate approximate token counts
                 input_tokens = len(prompt.split()) * 1.3
                 output_tokens = len(content.split()) * 1.3
@@ -785,31 +734,34 @@ class CerebrasProvider(BaseProvider):
         """Generate response using Cerebras API."""
         def _make_request():
             start_time = time.time()
+            ttft_recorded = False
+            ttft = 0.0
             
             try:
                 response = self.client.chat.completions.create(
                     model=model,
                     messages=[{"role": "user", "content": prompt}],
                     max_tokens=max_tokens,
-                    temperature=0.7
+                    temperature=0.7,
+                    stream=True
                 )
                 
+                content = ""
+                for chunk in response:
+                    if not ttft_recorded and chunk.choices and chunk.choices[0].delta.content:
+                        ttft = time.time() - start_time
+                        ttft_recorded = True
+                    
+                    if chunk.choices and chunk.choices[0].delta.content:
+                        content += chunk.choices[0].delta.content
+
                 end_time = time.time()
                 generation_time = end_time - start_time
                 
-                # Extract content and usage information
-                content = response.choices[0].message.content if response.choices else ""
-                usage = response.usage if hasattr(response, 'usage') else None
-                
-                if usage:
-                    input_tokens = usage.prompt_tokens
-                    output_tokens = usage.completion_tokens
-                    total_tokens = usage.total_tokens
-                else:
-                    # Fallback to approximation if usage not available
-                    input_tokens = int(len(prompt.split()) * 1.3)
-                    output_tokens = int(len(content.split()) * 1.3)
-                    total_tokens = input_tokens + output_tokens
+                # Approximate token usage if not provided in response
+                input_tokens = int(len(prompt.split()) * 1.3)
+                output_tokens = int(len(content.split()) * 1.3)
+                total_tokens = input_tokens + output_tokens
                 
                 return ProviderResponse(
                     content=content,
@@ -818,7 +770,7 @@ class CerebrasProvider(BaseProvider):
                     input_tokens=input_tokens,
                     output_tokens=output_tokens,
                     generation_time=generation_time,
-                    time_to_first_token=generation_time,  # Cerebras doesn't provide TTFT in non-streaming mode
+                    time_to_first_token=ttft if ttft_recorded else generation_time,
                     success=True
                 )
                 
@@ -2056,7 +2008,7 @@ Be objective and constructive in your evaluation. Focus on technical accuracy, c
         ax.grid(True, alpha=0.3, linestyle='--', axis='y')
         
         # Create legend for providers
-        legend_elements = [plt.Rectangle((0,0),1,1, facecolor=provider_colors[provider], alpha=0.8, edgecolor='black', label=provider.title()) 
+        legend_elements = [Rectangle((0,0),1,1, facecolor=provider_colors[provider], alpha=0.8, edgecolor='black', label=provider.title()) 
                           for provider in unique_providers]
         
         ax.legend(handles=legend_elements, bbox_to_anchor=(1.05, 1), loc='upper left', frameon=True, fancybox=True, shadow=True)
@@ -2115,7 +2067,7 @@ Be objective and constructive in your evaluation. Focus on technical accuracy, c
         ax.grid(True, alpha=0.3, linestyle='--', axis='y')
         
         # Create legend for providers
-        legend_elements = [plt.Rectangle((0,0),1,1, facecolor=provider_colors[provider], alpha=0.8, edgecolor='black', label=provider.title()) 
+        legend_elements = [Rectangle((0,0),1,1, facecolor=provider_colors[provider], alpha=0.8, edgecolor='black', label=provider.title()) 
                           for provider in unique_providers]
         
         ax.legend(handles=legend_elements, bbox_to_anchor=(1.05, 1), loc='upper left', frameon=True, fancybox=True, shadow=True)
@@ -2171,7 +2123,7 @@ Be objective and constructive in your evaluation. Focus on technical accuracy, c
         ax.grid(True, alpha=0.3, linestyle='--', axis='y')
         
         # Create legend for providers
-        legend_elements = [plt.Rectangle((0,0),1,1, facecolor=provider_colors[provider], alpha=0.8, edgecolor='black', label=provider.title()) 
+        legend_elements = [Rectangle((0,0),1,1, facecolor=provider_colors[provider], alpha=0.8, edgecolor='black', label=provider.title()) 
                           for provider in unique_providers]
         
         ax.legend(handles=legend_elements, bbox_to_anchor=(1.05, 1), loc='upper left', frameon=True, fancybox=True, shadow=True)
@@ -2371,9 +2323,15 @@ Be objective and constructive in your evaluation. Focus on technical accuracy, c
                         benchmark = future_to_benchmark[future]
                         try:
                             eval_result = future.result(timeout=REQUEST_TIMEOUT + 30)
-                            evaluation_results.append(eval_result)
-                            execution_summary['successful_evaluations'] += 1
-                            self.logger.info(f"✓ Evaluated {benchmark.provider}/{benchmark.model}: {eval_result.overall_score:.1f}/10")
+                            if eval_result:
+                                evaluation_results.append(eval_result)
+                                execution_summary['successful_evaluations'] += 1
+                                self.logger.info(f"✓ Evaluated {benchmark.provider}/{benchmark.model}: {eval_result.overall_score:.1f}/10")
+                            else:
+                                execution_summary['failed_evaluations'] += 1
+                                error_msg = f"Evaluation returned None for {benchmark.provider}/{benchmark.model}"
+                                execution_summary['errors'].append(error_msg)
+                                self.logger.error(f"✗ {error_msg}")
                             
                         except Exception as e:
                             execution_summary['failed_evaluations'] += 1
