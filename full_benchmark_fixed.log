@@ -1,0 +1,255 @@
+2025-07-15 20:56:38,152 - INFO - ✓ openai: API key loaded from OPENAI_API_KEY
+2025-07-15 20:56:38,152 - INFO - ✓ anthropic: API key loaded from ANTHROPIC_API_KEY
+2025-07-15 20:56:38,152 - INFO - ✓ google: API key loaded from GEMINI_API_KEY
+2025-07-15 20:56:38,152 - INFO - ✓ groq: API key loaded from GROQ_API_KEY
+2025-07-15 20:56:38,152 - INFO - ✓ xai: API key loaded from XAI_API_KEY
+2025-07-15 20:56:38,152 - INFO - ✓ deepseek: API key loaded from DEEPSEEK_API_KEY
+2025-07-15 20:56:38,152 - INFO - ✓ cerebras: API key loaded from CEREBRAS_API_KEY
+2025-07-15 20:56:38,152 - INFO - ✓ openai: API key validated
+2025-07-15 20:56:38,152 - INFO - ✓ anthropic: API key validated
+2025-07-15 20:56:38,152 - INFO - ✓ google: API key validated
+2025-07-15 20:56:38,152 - INFO - ✓ groq: API key validated
+2025-07-15 20:56:38,152 - INFO - ✓ xai: API key validated
+2025-07-15 20:56:38,152 - INFO - ✓ deepseek: API key validated
+2025-07-15 20:56:38,152 - INFO - ✓ cerebras: API key validated
+2025-07-15 20:56:38,152 - INFO - Initialized with 7 available providers
+2025-07-15 20:56:38,152 - INFO - ================================================================================
+2025-07-15 20:56:38,152 - INFO - STARTING UNIFIED LLM BENCHMARK EXECUTION
+2025-07-15 20:56:38,152 - INFO - ================================================================================
+2025-07-15 20:56:38,152 - INFO - Step 1: Validating configuration and API keys...
+2025-07-15 20:56:38,152 - INFO - ✓ 7/7 providers available
+2025-07-15 20:56:38,152 - INFO - Step 2: Collecting available models...
+2025-07-15 20:56:38,152 - INFO - openai: 5 models available
+2025-07-15 20:56:38,152 - INFO - anthropic: 4 models available
+2025-07-15 20:56:38,152 - INFO - google: 4 models available
+2025-07-15 20:56:38,152 - INFO - groq: 1 models available
+2025-07-15 20:56:38,152 - INFO - xai: 1 models available
+2025-07-15 20:56:38,152 - INFO - deepseek: 3 models available
+2025-07-15 20:56:38,152 - INFO - cerebras: 4 models available
+2025-07-15 20:56:38,152 - INFO - Total available models: 22
+2025-07-15 20:56:38,152 - INFO - ✓ Found 22 models to test
+2025-07-15 20:56:38,152 - INFO - Step 3: Executing model benchmarks...
+2025-07-15 20:56:38,186 - INFO - Benchmarking openai/gpt-4o...
+2025-07-15 20:56:38,186 - INFO - Benchmarking openai/o4-mini...
+2025-07-15 20:56:38,186 - INFO - Benchmarking openai/gpt-3.5-turbo...
+2025-07-15 20:56:38,186 - INFO - Benchmarking openai/gpt-4o-mini...
+2025-07-15 20:56:38,186 - INFO - Benchmarking openai/o3...
+2025-07-15 20:56:38,569 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:56:38,797 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:56:39,377 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:56:43,776 - INFO - ✓ openai/gpt-3.5-turbo: 67.09 tokens/sec, $0.5885
+2025-07-15 20:56:43,776 - INFO - Benchmarking anthropic/claude-sonnet-4-20250514...
+2025-07-15 20:56:47,160 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:56:47,968 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:56:53,820 - INFO - ✓ openai/gpt-4o-mini: 49.19 tokens/sec, $0.4692
+2025-07-15 20:56:53,821 - INFO - Benchmarking anthropic/claude-opus-4-20250514...
+2025-07-15 20:56:56,411 - INFO - ✓ openai/gpt-4o: 38.63 tokens/sec, $7.1700
+2025-07-15 20:56:56,411 - INFO - Benchmarking anthropic/claude-3-5-sonnet-20241022...
+2025-07-15 20:56:56,412 - INFO - ✓ Benchmarked openai/gpt-4o: 38.6 t/s
+2025-07-15 20:57:00,335 - INFO - ✓ openai/o4-mini: 33.18 tokens/sec, $0.4488
+2025-07-15 20:57:00,335 - INFO - Benchmarking anthropic/claude-3-5-haiku-20241022...
+2025-07-15 20:57:00,335 - INFO - ✓ Benchmarked openai/o4-mini: 33.2 t/s
+2025-07-15 20:57:04,973 - INFO - ✓ anthropic/claude-sonnet-4-20250514: 94.35 tokens/sec, $30.2070
+2025-07-15 20:57:04,974 - INFO - Benchmarking google/models/gemini-2.5-pro...
+2025-07-15 20:57:07,158 - INFO - ✓ openai/o3: 28.65 tokens/sec, $6.7440
+2025-07-15 20:57:07,159 - INFO - Benchmarking google/models/gemini-2.5-flash...
+2025-07-15 20:57:07,159 - INFO - ✓ Benchmarked openai/o3: 28.6 t/s
+2025-07-15 20:57:07,160 - INFO - ✓ Benchmarked openai/gpt-4o-mini: 49.2 t/s
+2025-07-15 20:57:07,160 - INFO - ✓ Benchmarked openai/gpt-3.5-turbo: 67.1 t/s
+2025-07-15 20:57:07,160 - INFO - ✓ Benchmarked anthropic/claude-sonnet-4-20250514: 94.4 t/s
+2025-07-15 20:57:18,583 - INFO - ✓ google/models/gemini-2.5-flash: 76.24 tokens/sec, $0.0080
+2025-07-15 20:57:18,583 - INFO - Benchmarking google/models/gemini-1.5-pro-latest...
+2025-07-15 20:57:22,761 - INFO - ✓ anthropic/claude-3-5-sonnet-20241022: 75.90 tokens/sec, $30.2070
+2025-07-15 20:57:22,762 - INFO - Benchmarking google/models/gemini-1.5-flash-latest...
+2025-07-15 20:57:23,179 - INFO - ✓ anthropic/claude-3-5-haiku-20241022: 66.98 tokens/sec, $6.1752
+2025-07-15 20:57:23,193 - INFO - Benchmarking groq/moonshotai/kimi-k2-instruct...
+2025-07-15 20:57:23,540 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:57:29,043 - INFO - ✓ groq/moonshotai/kimi-k2-instruct: 198.80 tokens/sec, $3.5410
+2025-07-15 20:57:29,053 - INFO - Benchmarking xai/grok-4-0709...
+2025-07-15 20:57:29,250 - INFO - ✓ anthropic/claude-opus-4-20250514: 56.45 tokens/sec, $151.0350
+2025-07-15 20:57:29,251 - INFO - ✓ Benchmarked anthropic/claude-opus-4-20250514: 56.5 t/s
+2025-07-15 20:57:29,251 - INFO - ✓ Benchmarked anthropic/claude-3-5-sonnet-20241022: 75.9 t/s
+2025-07-15 20:57:29,252 - INFO - ✓ Benchmarked anthropic/claude-3-5-haiku-20241022: 67.0 t/s
+2025-07-15 20:57:29,262 - INFO - Benchmarking deepseek/deepseek-chat...
+2025-07-15 20:57:29,560 - INFO - HTTP Request: POST https://api.x.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:57:29,606 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:57:34,011 - INFO - ✓ google/models/gemini-1.5-flash-latest: 78.41 tokens/sec, $0.0054
+2025-07-15 20:57:34,020 - INFO - Benchmarking deepseek/deepseek-coder...
+2025-07-15 20:57:34,335 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:57:34,710 - INFO - ✓ google/models/gemini-2.5-pro: 33.66 tokens/sec, $0.0367
+2025-07-15 20:57:34,712 - INFO - ✓ Benchmarked google/models/gemini-2.5-pro: 33.7 t/s
+2025-07-15 20:57:34,712 - INFO - ✓ Benchmarked google/models/gemini-2.5-flash: 76.2 t/s
+2025-07-15 20:57:34,722 - INFO - Benchmarking deepseek/deepseek-reasoner...
+2025-07-15 20:57:35,043 - INFO - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:57:47,820 - INFO - ✓ google/models/gemini-1.5-pro-latest: 36.36 tokens/sec, $0.0227
+2025-07-15 20:57:47,822 - INFO - ✓ Benchmarked google/models/gemini-1.5-pro-latest: 36.4 t/s
+2025-07-15 20:57:47,822 - INFO - ✓ Benchmarked google/models/gemini-1.5-flash-latest: 78.4 t/s
+2025-07-15 20:57:47,822 - INFO - ✓ Benchmarked groq/moonshotai/kimi-k2-instruct: 198.8 t/s
+2025-07-15 20:57:47,984 - INFO - HTTP Request: GET https://api.cerebras.ai/v1/tcp_warming "HTTP/1.1 200 OK"
+2025-07-15 20:57:47,987 - INFO - Benchmarking cerebras/qwen-3-235b-a22b...
+2025-07-15 20:57:51,259 - INFO - HTTP Request: POST https://api.cerebras.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:57:51,269 - INFO - ✓ cerebras/qwen-3-235b-a22b: 609.38 tokens/sec, $1.2360
+2025-07-15 20:57:51,386 - INFO - HTTP Request: GET https://api.cerebras.ai/v1/tcp_warming "HTTP/1.1 200 OK"
+2025-07-15 20:57:51,386 - INFO - Benchmarking cerebras/qwen-3-32b...
+2025-07-15 20:57:53,219 - INFO - HTTP Request: POST https://api.cerebras.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:57:53,222 - INFO - ✓ cerebras/qwen-3-32b: 1089.29 tokens/sec, $0.6180
+2025-07-15 20:57:53,348 - INFO - HTTP Request: GET https://api.cerebras.ai/v1/tcp_warming "HTTP/1.1 200 OK"
+2025-07-15 20:57:53,349 - INFO - Benchmarking cerebras/llama-3.3-70b...
+2025-07-15 20:57:54,184 - INFO - HTTP Request: POST https://api.cerebras.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:57:54,185 - INFO - ✓ cerebras/llama-3.3-70b: 1550.27 tokens/sec, $0.5524
+2025-07-15 20:57:54,332 - INFO - HTTP Request: GET https://api.cerebras.ai/v1/tcp_warming "HTTP/1.1 200 OK"
+2025-07-15 20:57:54,333 - INFO - Benchmarking cerebras/llama3.1-8b...
+2025-07-15 20:57:54,906 - INFO - HTTP Request: POST https://api.cerebras.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 20:57:54,907 - INFO - ✓ cerebras/llama3.1-8b: 1809.43 tokens/sec, $0.1124
+2025-07-15 20:58:01,609 - INFO - ✓ xai/grok-4-0709: 27.71 tokens/sec, $0.0019
+2025-07-15 20:58:01,609 - INFO - ✓ Benchmarked xai/grok-4-0709: 27.7 t/s
+2025-07-15 20:58:38,160 - INFO - ✓ deepseek/deepseek-chat: 14.49 tokens/sec, $0.0015
+2025-07-15 20:58:38,160 - INFO - ✓ Benchmarked deepseek/deepseek-chat: 14.5 t/s
+2025-07-15 20:58:43,210 - INFO - ✓ deepseek/deepseek-coder: 13.73 tokens/sec, $0.0014
+2025-07-15 20:58:43,211 - INFO - ✓ Benchmarked deepseek/deepseek-coder: 13.7 t/s
+2025-07-15 20:59:09,398 - INFO - ✓ deepseek/deepseek-reasoner: 0.00 tokens/sec, $0.0001
+2025-07-15 20:59:09,399 - INFO - ✓ Benchmarked deepseek/deepseek-reasoner: 0.0 t/s
+2025-07-15 20:59:09,399 - INFO - ✓ Benchmarked cerebras/qwen-3-235b-a22b: 609.4 t/s
+2025-07-15 20:59:09,399 - INFO - ✓ Benchmarked cerebras/qwen-3-32b: 1089.3 t/s
+2025-07-15 20:59:09,400 - INFO - ✓ Benchmarked cerebras/llama-3.3-70b: 1550.3 t/s
+2025-07-15 20:59:09,400 - INFO - ✓ Benchmarked cerebras/llama3.1-8b: 1809.4 t/s
+2025-07-15 20:59:09,401 - INFO - ✓ Benchmark phase complete: 22/22 successful
+2025-07-15 20:59:09,401 - INFO - Step 4: Generating reference response for quality evaluation...
+2025-07-15 20:59:09,401 - INFO - Generating reference response using Claude Opus...
+2025-07-15 20:59:46,365 - INFO - ✓ Reference response generated successfully
+2025-07-15 20:59:46,365 - INFO - ✓ Reference response generated successfully
+2025-07-15 20:59:46,366 - INFO - Step 5: Executing quality evaluations...
+2025-07-15 20:59:46,366 - INFO - Evaluating openai/gpt-4o...
+2025-07-15 20:59:46,366 - INFO - Evaluating openai/o4-mini...
+2025-07-15 20:59:46,367 - INFO - Evaluating openai/o3...
+2025-07-15 20:59:46,368 - INFO - Evaluating openai/gpt-4o-mini...
+2025-07-15 20:59:46,369 - INFO - Evaluating openai/gpt-3.5-turbo...
+2025-07-15 20:59:58,133 - INFO - ✓ gpt-3.5-turbo: Overall score 3.0/10
+2025-07-15 20:59:58,134 - INFO - Evaluating anthropic/claude-sonnet-4-20250514...
+2025-07-15 20:59:58,928 - INFO - ✓ o4-mini: Overall score 4.4/10
+2025-07-15 20:59:58,929 - INFO - Evaluating anthropic/claude-opus-4-20250514...
+2025-07-15 20:59:59,467 - INFO - ✓ gpt-4o: Overall score 4.2/10
+2025-07-15 20:59:59,467 - INFO - Evaluating anthropic/claude-3-5-sonnet-20241022...
+2025-07-15 20:59:59,467 - INFO - ✓ Evaluated openai/gpt-4o: 4.2/10
+2025-07-15 20:59:59,467 - INFO - ✓ Evaluated openai/o4-mini: 4.4/10
+2025-07-15 20:59:59,594 - INFO - ✓ gpt-4o-mini: Overall score 4.4/10
+2025-07-15 20:59:59,594 - INFO - Evaluating anthropic/claude-3-5-haiku-20241022...
+2025-07-15 21:00:00,277 - INFO - ✓ o3: Overall score 3.6/10
+2025-07-15 21:00:00,277 - INFO - Evaluating google/models/gemini-2.5-pro...
+2025-07-15 21:00:00,277 - INFO - ✓ Evaluated openai/o3: 3.6/10
+2025-07-15 21:00:00,278 - INFO - ✓ Evaluated openai/gpt-4o-mini: 4.4/10
+2025-07-15 21:00:00,278 - INFO - ✓ Evaluated openai/gpt-3.5-turbo: 3.0/10
+2025-07-15 21:00:11,160 - INFO - ✓ claude-sonnet-4-20250514: Overall score 3.6/10
+2025-07-15 21:00:11,160 - INFO - Evaluating google/models/gemini-2.5-flash...
+2025-07-15 21:00:11,161 - INFO - ✓ Evaluated anthropic/claude-sonnet-4-20250514: 3.6/10
+2025-07-15 21:00:11,824 - INFO - ✓ claude-opus-4-20250514: Overall score 4.0/10
+2025-07-15 21:00:11,825 - INFO - Evaluating google/models/gemini-1.5-pro-latest...
+2025-07-15 21:00:11,825 - INFO - ✓ Evaluated anthropic/claude-opus-4-20250514: 4.0/10
+2025-07-15 21:00:12,203 - INFO - ✓ claude-3-5-haiku-20241022: Overall score 4.4/10
+2025-07-15 21:00:12,203 - INFO - Evaluating google/models/gemini-1.5-flash-latest...
+2025-07-15 21:00:12,351 - INFO - ✓ claude-3-5-sonnet-20241022: Overall score 6.4/10
+2025-07-15 21:00:12,351 - INFO - Evaluating groq/moonshotai/kimi-k2-instruct...
+2025-07-15 21:00:12,352 - INFO - ✓ Evaluated anthropic/claude-3-5-sonnet-20241022: 6.4/10
+2025-07-15 21:00:12,352 - INFO - ✓ Evaluated anthropic/claude-3-5-haiku-20241022: 4.4/10
+2025-07-15 21:00:14,636 - INFO - ✓ models/gemini-2.5-pro: Overall score 4.4/10
+2025-07-15 21:00:14,636 - INFO - Evaluating xai/grok-4-0709...
+2025-07-15 21:00:14,636 - INFO - ✓ Evaluated google/models/gemini-2.5-pro: 4.4/10
+2025-07-15 21:00:24,765 - INFO - ✓ models/gemini-2.5-flash: Overall score 3.4/10
+2025-07-15 21:00:24,766 - INFO - Evaluating deepseek/deepseek-chat...
+2025-07-15 21:00:24,766 - INFO - ✓ Evaluated google/models/gemini-2.5-flash: 3.4/10
+2025-07-15 21:00:24,973 - INFO - ✓ moonshotai/kimi-k2-instruct: Overall score 5.0/10
+2025-07-15 21:00:24,974 - INFO - Evaluating deepseek/deepseek-coder...
+2025-07-15 21:00:25,100 - INFO - ✓ models/gemini-1.5-flash-latest: Overall score 3.8/10
+2025-07-15 21:00:25,101 - ERROR - Cannot evaluate deepseek-reasoner: No response content available
+2025-07-15 21:00:25,101 - INFO - Evaluating cerebras/qwen-3-235b-a22b...
+2025-07-15 21:00:25,548 - INFO - ✓ models/gemini-1.5-pro-latest: Overall score 4.6/10
+2025-07-15 21:00:25,548 - INFO - Evaluating cerebras/qwen-3-32b...
+2025-07-15 21:00:25,548 - INFO - ✓ Evaluated google/models/gemini-1.5-pro-latest: 4.6/10
+2025-07-15 21:00:25,549 - INFO - ✓ Evaluated google/models/gemini-1.5-flash-latest: 3.8/10
+2025-07-15 21:00:25,549 - INFO - ✓ Evaluated groq/moonshotai/kimi-k2-instruct: 5.0/10
+2025-07-15 21:00:28,867 - INFO - ✓ grok-4-0709: Overall score 4.0/10
+2025-07-15 21:00:28,867 - INFO - Evaluating cerebras/llama-3.3-70b...
+2025-07-15 21:00:28,867 - INFO - ✓ Evaluated xai/grok-4-0709: 4.0/10
+2025-07-15 21:00:34,871 - INFO - ✓ qwen-3-235b-a22b: Overall score 1.6/10
+2025-07-15 21:00:34,871 - INFO - Evaluating cerebras/llama3.1-8b...
+2025-07-15 21:00:37,525 - INFO - ✓ deepseek-coder: Overall score 4.6/10
+2025-07-15 21:00:38,264 - INFO - ✓ qwen-3-32b: Overall score 1.4/10
+2025-07-15 21:00:38,324 - INFO - ✓ deepseek-chat: Overall score 4.6/10
+2025-07-15 21:00:38,325 - INFO - ✓ Evaluated deepseek/deepseek-chat: 4.6/10
+2025-07-15 21:00:38,325 - INFO - ✓ Evaluated deepseek/deepseek-coder: 4.6/10
+2025-07-15 21:00:38,326 - ERROR - ✗ Evaluation failed for deepseek/deepseek-reasoner: 'NoneType' object has no attribute 'overall_score'
+2025-07-15 21:00:38,326 - INFO - ✓ Evaluated cerebras/qwen-3-235b-a22b: 1.6/10
+2025-07-15 21:00:38,326 - INFO - ✓ Evaluated cerebras/qwen-3-32b: 1.4/10
+2025-07-15 21:00:41,187 - INFO - ✓ llama-3.3-70b: Overall score 2.8/10
+2025-07-15 21:00:41,188 - INFO - ✓ Evaluated cerebras/llama-3.3-70b: 2.8/10
+2025-07-15 21:00:47,588 - INFO - ✓ llama3.1-8b: Overall score 2.8/10
+2025-07-15 21:00:47,588 - INFO - ✓ Evaluated cerebras/llama3.1-8b: 2.8/10
+2025-07-15 21:00:47,589 - INFO - ✓ Evaluation phase complete: 22/22 successful
+2025-07-15 21:00:47,589 - INFO - Step 6: Processing and aggregating results...
+2025-07-15 21:00:47,589 - INFO - Starting data processing and aggregation...
+2025-07-15 21:00:47,589 - INFO - Filtered results: 22 -> 22 benchmark, 22 -> 21 evaluation
+2025-07-15 21:00:47,590 - INFO - Deduplication: 22 -> 22 benchmark results
+2025-07-15 21:00:47,598 - INFO - Aggregated 22 results with 22 successful benchmarks
+2025-07-15 21:00:47,599 - INFO - Results sorted by composite_score (descending)
+2025-07-15 21:00:47,599 - INFO - Data processing complete: 22 final results
+2025-07-15 21:00:47,599 - INFO - ✓ Data processing complete: 22 final results
+2025-07-15 21:00:47,599 - INFO - Step 7: Generating output files...
+2025-07-15 21:00:47,647 - INFO - ✓ Excel file generated successfully: unified_benchmark_results_2025-07-15_20-56-38.xlsx (31,475 bytes)
+2025-07-15 21:00:47,859 - INFO - ✓ Generated speed_vs_quality chart: speed_vs_quality_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:47,960 - INFO - ✓ Generated speed_comparison chart: speed_comparison_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,051 - INFO - ✓ Generated quality_comparison chart: quality_comparison_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,142 - INFO - ✓ Generated ttft_comparison chart: ttft_comparison_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,142 - INFO - Generated 4 PDF charts successfully
+2025-07-15 21:00:48,142 - INFO - ✓ Generated 5 output files:
+2025-07-15 21:00:48,142 - INFO -   📊 Excel: /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/unified_benchmark_results_2025-07-15_20-56-38.xlsx
+2025-07-15 21:00:48,142 - INFO -   📈 Chart: /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/speed_vs_quality_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,142 - INFO -   📈 Chart: /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/speed_comparison_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,142 - INFO -   📈 Chart: /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/quality_comparison_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,142 - INFO -   📈 Chart: /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/ttft_comparison_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,142 - INFO - ================================================================================
+2025-07-15 21:00:48,142 - INFO - BENCHMARK EXECUTION SUMMARY
+2025-07-15 21:00:48,142 - INFO - ================================================================================
+2025-07-15 21:00:48,142 - INFO - Status: COMPLETED_WITH_RESULTS
+2025-07-15 21:00:48,142 - INFO - Duration: 250.0 seconds
+2025-07-15 21:00:48,142 - INFO - Models Attempted: 22
+2025-07-15 21:00:48,142 - INFO - Successful Benchmarks: 22
+2025-07-15 21:00:48,142 - INFO - Failed Benchmarks: 0
+2025-07-15 21:00:48,142 - INFO - Success Rate: 100.0%
+2025-07-15 21:00:48,142 - INFO - Successful Evaluations: 22
+2025-07-15 21:00:48,142 - INFO - Providers Tested: openai, anthropic, google, groq, xai, deepseek, cerebras
+2025-07-15 21:00:48,142 - INFO - Generated Files:
+2025-07-15 21:00:48,142 - INFO -   📊 /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/unified_benchmark_results_2025-07-15_20-56-38.xlsx
+2025-07-15 21:00:48,142 - INFO -   📈 /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/speed_vs_quality_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,142 - INFO -   📈 /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/speed_comparison_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,142 - INFO -   📈 /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/quality_comparison_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,142 - INFO -   📈 /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/ttft_comparison_2025-07-15_20-56-38.pdf
+2025-07-15 21:00:48,142 - INFO - Errors: 1
+2025-07-15 21:00:48,142 - INFO -   ❌ Evaluation failed for deepseek/deepseek-reasoner: 'NoneType' object has no attribute 'overall_score'
+2025-07-15 21:00:48,142 - INFO - ================================================================================
+================================================================================
+UNIFIED LLM BENCHMARKER
+================================================================================
+Initializing benchmarker...
+✓ Configuration loaded with 7 providers
+✓ Benchmark prompt length: 283 characters
+✓ Available providers: 7
+
+Starting benchmark execution...
+
+================================================================================
+EXECUTION COMPLETED
+================================================================================
+Status: COMPLETED WITH RESULTS
+Duration: 250.0 seconds
+Success Rate: 100.0%
+Models Tested: 22/22
+
+Generated Files:
+  📊 Excel: /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/unified_benchmark_results_2025-07-15_20-56-38.xlsx
+  📈 Chart: /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/speed_vs_quality_2025-07-15_20-56-38.pdf
+  📈 Chart: /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/speed_comparison_2025-07-15_20-56-38.pdf
+  📈 Chart: /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/quality_comparison_2025-07-15_20-56-38.pdf
+  📈 Chart: /Users/macbook2024/Dropbox/AAA Backup/A Working/Local Model Speed Testing/ttft_comparison_2025-07-15_20-56-38.pdf
+
+Errors Encountered: 1
+================================================================================
