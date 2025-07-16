@@ -121,10 +121,15 @@ PROVIDERS = {
         "pricing": {...}
     },
     "cerebras": {
-        "provider_class": CerebrasProvider,
-        "models": ["qwen3-235b"],
+        "base_url": "https://api.cerebras.ai/v1",
+        "models": ["qwen-3-235b-a22b", "qwen-3-32b", "llama-3.3-70b", "llama3.1-8b"],
         "api_key_env": "CEREBRAS_API_KEY",
-        "pricing": {...}
+        "pricing": {
+            "qwen-3-235b-a22b": {"input": 0.60, "output": 0.60},
+            "qwen-3-32b": {"input": 0.30, "output": 0.30},
+            "llama-3.3-70b": {"input": 0.40, "output": 0.40},
+            "llama3.1-8b": {"input": 0.10, "output": 0.10}
+        }
     },
     # ... other providers
 }
